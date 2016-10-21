@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
 	private LoadingView loading;
 	
 	int dialog_count = 0;
-	//ÊµÏÖ¹Ì¶¨Ê±¼äÄÚµã»÷Á½´Î°´Å¥ÍË³ö³ÌĞò
+	//å®ç°å›ºå®šæ—¶é—´å†…ç‚¹å‡»ä¸¤æ¬¡æŒ‰é’®é€€å‡ºç¨‹åº
 	private  long exit_time = 0;
 	
 	private ValueCallback<Uri> mUploadMessage;
@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//ÆôÓÃ´°¿ÚÌØÕ÷Ïû³ı±êÌâÀ¸
+		//å¯ç”¨çª—å£ç‰¹å¾æ¶ˆé™¤æ ‡é¢˜æ 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 	
 		setContentView(R.layout.activity_main);
@@ -72,11 +72,11 @@ public class MainActivity extends Activity {
 		
 		
 		
-	    //ÉèÖÃ×Ô¶¨Òå½ø¶ÈÌõ
+	    //è®¾ç½®è‡ªå®šä¹‰è¿›åº¦æ¡
 		loading = (LoadingView) findViewById(R.id.loading);
 		loading.getBackground().setAlpha(40);
 		loading.setVisibility(View.INVISIBLE);
-		//»¶Ó­½çÃæ
+		//æ¬¢è¿ç•Œé¢
 		new Handler().postDelayed(new Runnable(){
 			
             @Override
@@ -85,31 +85,31 @@ public class MainActivity extends Activity {
             			webview.loadUrl("http://m.kdpay.com/#page1");
             }    
         }, 2000);
-		//ÉèÖÃwebviewÊôĞÔ
-		webview.getSettings().setJavaScriptEnabled(true);//ÔÊĞíJS
+		//è®¾ç½®webviewå±æ€§
+		webview.getSettings().setJavaScriptEnabled(true);//å…è®¸JS
 		webview.getSettings().setSupportZoom(true);
-		webview.requestFocus();//Ê¹Ò³Ãæ»ñµÃ½¹µã
-		webview.getSettings().setUseWideViewPort(true);// Õâ¸öºÜ¹Ø¼ü £¬ÈÎÒâ±ÈÀıËõ·Å
-		webview.getSettings().setAllowFileAccess(true);   //»ñÈ¡±¾µØÎÄ¼ş·ÃÎÊÈ¨ÏŞ  µÇÂ¼cookieÊ±Ê¹ÓÃ£¬ÃâµÇÂ¼
+		webview.requestFocus();//ä½¿é¡µé¢è·å¾—ç„¦ç‚¹
+		webview.getSettings().setUseWideViewPort(true);// è¿™ä¸ªå¾ˆå…³é”® ï¼Œä»»æ„æ¯”ä¾‹ç¼©æ”¾
+		webview.getSettings().setAllowFileAccess(true);   //è·å–æœ¬åœ°æ–‡ä»¶è®¿é—®æƒé™  ç™»å½•cookieæ—¶ä½¿ç”¨ï¼Œå…ç™»å½•
 		webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
 		webview.getSettings().setDomStorageEnabled(true);
-		webview.getSettings().setLoadsImagesAutomatically(true);//Ö§³ÖÍ¼Æ¬×Ô¶¯¼ÓÔØ
+		webview.getSettings().setLoadsImagesAutomatically(true);//æ”¯æŒå›¾ç‰‡è‡ªåŠ¨åŠ è½½
 		webview.getSettings().setAppCacheEnabled(true);
 
-		webview.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);// Ö§³ÖÄÚÈİÖØĞÂ²¼¾Ö
-		webview.getSettings().setLoadWithOverviewMode(true); //Ö§³ÖËõ·Åµ½ÆÁÄ»´óĞ¡
+		webview.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);// æ”¯æŒå†…å®¹é‡æ–°å¸ƒå±€
+		webview.getSettings().setLoadWithOverviewMode(true); //æ”¯æŒç¼©æ”¾åˆ°å±å¹•å¤§å°
 		
-		//ÅĞ¶ÏÓÃ»§ÊÇ·ñµÚÒ»´ÎÆô¶¯£¬²»ÆôÓÃ»º´æ
+		//åˆ¤æ–­ç”¨æˆ·æ˜¯å¦ç¬¬ä¸€æ¬¡å¯åŠ¨ï¼Œä¸å¯ç”¨ç¼“å­˜
 		if(user_first)
 		{
 			setting.edit().putBoolean("FIRST", false).commit();  
 			webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-//			Toast.makeText(getApplicationContext(), "µÚÒ»´ÎÆô¶¯", Toast.LENGTH_SHORT).show();
+//			Toast.makeText(getApplicationContext(), "ç¬¬ä¸€æ¬¡å¯åŠ¨", Toast.LENGTH_SHORT).show();
 		}
 		else 
 		{
-			webview.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);//ÉèÖÃ»º´æ
-//			Toast.makeText(getApplicationContext(), "²»ÊÇµÚÒ»´ÎÆô¶¯", Toast.LENGTH_SHORT).show();
+			webview.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//è®¾ç½®ç¼“å­˜
+//			Toast.makeText(getApplicationContext(), "ä¸æ˜¯ç¬¬ä¸€æ¬¡å¯åŠ¨", Toast.LENGTH_SHORT).show();
 		}
 		
 //		webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
@@ -118,7 +118,7 @@ public class MainActivity extends Activity {
 		public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
 			// TODO Auto-generated method stub
 			Bundle bundle = new Bundle();
-			Toast toast =Toast.makeText(getApplicationContext(), "¿Ş~ÕÒ²»µ½ÍøÂçÁË¡¤¡¤", Toast.LENGTH_SHORT);
+			Toast toast =Toast.makeText(getApplicationContext(), "å“­~æ‰¾ä¸åˆ°ç½‘ç»œäº†Â·Â·", Toast.LENGTH_SHORT);
 			toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 			toast.show();
 		    Intent intent = new Intent(MainActivity.this,FailNotFound.class);
@@ -138,26 +138,43 @@ public class MainActivity extends Activity {
 			 
 		    
 		}
+		  /*****
+		   * 1.é€šè¿‡sdkç‰ˆæœ¬åˆ¤æ–­ æ˜¯å¦æ˜¯4.4ä»¥ä¸Šï¼Œè‹¥ä¸æ˜¯ï¼Œåˆ™é€šè¿‡æ¸¸è§ˆå™¨æ‰“å¼€
+		   * 
+		   * 
+		   */
+			
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, final String url) {
 				// TODO Auto-generated method stub
-				Pattern protocol = Pattern.compile("/protocol");
-				Matcher m_protocol  = protocol.matcher(url);
+				if(Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
+				{
+					Toast toast  = Toast.makeText(getApplicationContext(),"æ‚¨çš„å®‰å“ç‰ˆæœ¬è¿‡ä½ï¼Œæ­£åœ¨è·³è½¬æ¸¸è§ˆå™¨æ‰“å¼€ã€‚ã€‚", Toast.LENGTH_SHORT);
+					toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+					toast.show();
+					Intent i =new Intent(Intent.ACTION_VIEW);
+					i.setData(Uri.parse(url));
+					startActivity(i);
+					return false;	
+				}
+				else {
 				if(url.startsWith("http:") || url.startsWith("https:"))
 				{
-					 
-					  return false;	
+					 view.loadUrl(url);
+					 return true;	
 				}
 				Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(url));
 				startActivity(intent);
 			    return true;
+			}
+				
 			}
 		});	
 		
 		
 		
 		webview.setWebChromeClient(new WebChromeClient(){
-			  //¹Ø¼ü´úÂë£¬ÒÔÏÂº¯ÊıÊÇÃ»ÓĞAPIÎÄµµµÄ£¬ËùÒÔÔÚEclipseÖĞ»á±¨´í£¬Èç¹ûÌí¼ÓÁË@Override¹Ø¼ü×ÖÔÚÕâÀïµÄ»°¡£
+			  //å…³é”®ä»£ç ï¼Œä»¥ä¸‹å‡½æ•°æ˜¯æ²¡æœ‰APIæ–‡æ¡£çš„ï¼Œæ‰€ä»¥åœ¨Eclipseä¸­ä¼šæŠ¥é”™ï¼Œå¦‚æœæ·»åŠ äº†@Overrideå…³é”®å­—åœ¨è¿™é‡Œçš„è¯ã€‚
 
 			// For 3.0+ Devices (Start)
             // onActivityResult attached before constructor
@@ -183,7 +200,7 @@ public class MainActivity extends Activity {
             		              Intent i = new Intent(Intent.ACTION_GET_CONTENT);  
             		              i.addCategory(Intent.CATEGORY_OPENABLE);  
             		              i.setType("*/*");  
-            		              startActivityForResult(Intent.createChooser(i, "ÎÄ¼şÑ¡Ôñ"),  
+            		              startActivityForResult(Intent.createChooser(i, "æ–‡ä»¶é€‰æ‹©"),  
             		            		  FILECHOOSER_RESULTCODE);  
             		               return true;  
             		           }  
@@ -215,7 +232,7 @@ public class MainActivity extends Activity {
 				// TODO Auto-generated method stub
 				if(newProgress == 100)
 				{
-					//¼ÓÔØÍê³É
+					//åŠ è½½å®Œæˆ
 
 					loading.setVisibility(View.INVISIBLE);
 					image.setVisibility(View.INVISIBLE);
@@ -244,17 +261,17 @@ public class MainActivity extends Activity {
 		
 		
 	}
-	//ÅĞ¶Ïµã»÷ÊÂ¼ş
+	//åˆ¤æ–­ç‚¹å‡»äº‹ä»¶
 @Override
 public boolean onKeyDown(int keyCode, KeyEvent event) {
 	// TODO Auto-generated method stub
 	if(keyCode == KeyEvent.KEYCODE_BACK)
 	{
 		
-		//»ñÈ¡µ±Ç°webviewµÄurl
+		//è·å–å½“å‰webviewçš„url
 	    String url = webview.getUrl();
 	    url = url.toLowerCase();
-	    //Ê×Ò³ÅĞ¶Ï
+	    //é¦–é¡µåˆ¤æ–­
    	    Pattern goIndex = Pattern.compile("/#page[2-9]");
    	    Pattern exit = Pattern.compile("/#page1");
    	    Pattern info = Pattern.compile("/userinfo");
@@ -264,11 +281,11 @@ public boolean onKeyDown(int keyCode, KeyEvent event) {
    	    Matcher m_info = info.matcher(url);
    	   
 //		Toast.makeText(getApplicationContext(), webview.copyBackForwardList().getCurrentIndex()+"", Toast.LENGTH_SHORT).show();
-		//»ñÈ¡webviewÀúÊ·Ò³Ãæ×ÜÊı 
+		//è·å–webviewå†å²é¡µé¢æ€»æ•° 
    	    int size = webview.copyBackForwardList().getSize();
 		     if(webview.canGoBack())
 		     {	 
-		    	 //Èç¹ûÊÇÊ×Ò³£¬µã»÷Á½´ÎºóÍË¼üÍË³ö³ÌĞò
+		    	 //å¦‚æœæ˜¯é¦–é¡µï¼Œç‚¹å‡»ä¸¤æ¬¡åé€€é”®é€€å‡ºç¨‹åº
 		    	  if(m_exit.find())
 				     {
 				    	 sureExit();
@@ -277,13 +294,13 @@ public boolean onKeyDown(int keyCode, KeyEvent event) {
 		    
 			    	 if(m.find())
 			    	 {
-			    		 //²âÊÔ·¢ÏÖ µÚÒ»´ò¿ªµÄÒ³ÃæÊÇ-1
+			    		 //æµ‹è¯•å‘ç° ç¬¬ä¸€æ‰“å¼€çš„é¡µé¢æ˜¯-1
 	//		    		 Toast.makeText(getApplicationContext(), webview.copyBackForwardList().getCurrentIndex()+"--->"+webview.copyBackForwardList().getCurrentItem().getUrl(), Toast.LENGTH_SHORT).show();		
 	//		    		 webview.go(size-2); 
 			    		 webview.goBackOrForward(-size+1);
 			    		 return true;
 			    	 }
-		    	 //Èç¹ûÊÇ¸öÈËĞÅÏ¢½çÃæ£¬ºóÍË·µ»Øµ½Ê×Ò³
+		    	 //å¦‚æœæ˜¯ä¸ªäººä¿¡æ¯ç•Œé¢ï¼Œåé€€è¿”å›åˆ°é¦–é¡µ
 			    	 if(m_info.find())
 				     {
 //				    	 Toast.makeText(getApplicationContext(), "can goback-->"+webview.copyBackForwardList().getCurrentIndex(), Toast.LENGTH_SHORT).show();
@@ -350,12 +367,12 @@ public void onActivityResult(int requestCode, int resultCode, Intent intent)
 }
 
 
-//µã»÷Á½´Î°´Å¥ÍË³ö³ÌĞò
+//ç‚¹å‡»ä¸¤æ¬¡æŒ‰é’®é€€å‡ºç¨‹åº
 public void sureExit(){
 	if((System.currentTimeMillis() - exit_time) > 2000)
 	{
 //		Toast.makeText(getApplicationContext(), exit_time+"", Toast.LENGTH_SHORT).show();
-		Toast.makeText(getApplicationContext(), "ÔÙ°´Ò»´ÎÍË³ö³ÌĞò~~", Toast.LENGTH_SHORT).show();
+		Toast.makeText(getApplicationContext(), "å†æŒ‰ä¸€æ¬¡é€€å‡ºç¨‹åº~~", Toast.LENGTH_SHORT).show();
 		exit_time = System.currentTimeMillis();
 	}
 	else 
