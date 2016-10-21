@@ -81,6 +81,7 @@ public class MainActivity extends Activity {
 			
             @Override
             public void run() {
+            			image.setVisibility(View.VISIBLE);
             			webview.loadUrl("http://m.kdpay.com/#page1");
             }    
         }, 2000);
@@ -94,42 +95,29 @@ public class MainActivity extends Activity {
 		webview.getSettings().setDomStorageEnabled(true);
 		webview.getSettings().setLoadsImagesAutomatically(true);//支持图片自动加载
 		webview.getSettings().setAppCacheEnabled(true);
-		/*****
-		 * 若安卓版本低于4.4，则不能支持内容重新布局，会出现页面错误
-		 *
-		 */
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-		{
-			webview.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);// 支持内容重新布局
-		}
+
+		webview.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);// 支持内容重新布局
 		webview.getSettings().setLoadWithOverviewMode(true); //支持缩放到屏幕大小
 		
 		//判断用户是否第一次启动，不启用缓存
-//		if(user_first)
-//		{
-//			setting.edit().putBoolean("FIRST", false).commit();  
-//			webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+		if(user_first)
+		{
+			setting.edit().putBoolean("FIRST", false).commit();  
+			webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
 //			Toast.makeText(getApplicationContext(), "第一次启动", Toast.LENGTH_SHORT).show();
-//		}
-//		else 
-//		{
-////			if(Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
-////			{
-////				webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);//设置缓存
-////			}
-////			else 
-////			{
-//			webview.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//设置缓存
-////			}
+		}
+		else 
+		{
+			webview.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);//设置缓存
 //			Toast.makeText(getApplicationContext(), "不是第一次启动", Toast.LENGTH_SHORT).show();
-//		}
-		webview.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+		}
 		
-		
+//		webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
 		webview.setWebViewClient(new WebViewClient(){
 		  @Override
 		public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
 			// TODO Auto-generated method stub
+			Bundle bundle = new Bundle();
 			Toast toast =Toast.makeText(getApplicationContext(), "哭~找不到网络了··", Toast.LENGTH_SHORT);
 			toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 			toast.show();
@@ -144,7 +132,9 @@ public class MainActivity extends Activity {
 		    {
 		    	finish();
 		    }
-
+//		    
+//		    finish();
+//			view.loadUrl("file:///android_asset/err.html");
 			 
 		    
 		}
@@ -157,18 +147,17 @@ public class MainActivity extends Activity {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, final String url) {
 				// TODO Auto-generated method stub
-				//通过sdk版本判断 是否是4.4以上，若不是，则通过游览器打开
-//				if(Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
-//				{
-//					Toast toast  = Toast.makeText(getApplicationContext(),"您的安卓版本过低，正在跳转游览器打开。。", Toast.LENGTH_SHORT);
-//					toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-//					toast.show();
-////					Intent i =new Intent(Intent.ACTION_VIEW);
-////					i.setData(Uri.parse(url));
-////					startActivity(i);
-//					return false;	
-//				}
-//				else {
+				if(Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
+				{
+					Toast toast  = Toast.makeText(getApplicationContext(),"您的安卓版本过低，正在跳转游览器打开。。", Toast.LENGTH_SHORT);
+					toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+					toast.show();
+					Intent i =new Intent(Intent.ACTION_VIEW);
+					i.setData(Uri.parse(url));
+					startActivity(i);
+					return false;	
+				}
+				else {
 				if(url.startsWith("http:") || url.startsWith("https:"))
 				{
 					 view.loadUrl(url);
@@ -179,7 +168,7 @@ public class MainActivity extends Activity {
 			    return true;
 			}
 				
-//			}
+			}
 		});	
 		
 		
@@ -278,16 +267,12 @@ public boolean onKeyDown(int keyCode, KeyEvent event) {
 	// TODO Auto-generated method stub
 	if(keyCode == KeyEvent.KEYCODE_BACK)
 	{
-//	     Toast.makeText(getApplicationContext(), "111: "+webview.getUrl().indexOf("https://m.kdpay.com/")+" ", Toast.LENGTH_SHORT).show();
-
-//		Toast.makeText(getApplicationContext(), webview.getUrl()+"", Toast.LENGTH_SHORT).show();
+		
 		//获取当前webview的url
 	    String url = webview.getUrl();
 	    url = url.toLowerCase();
-//	    Toast.makeText(getApplicationContext(), "111: "+url.indexOf("https://m.kdpay.com/")+" ", Toast.LENGTH_SHORT).show();
-	   
 	    //首页判断
-   	    Pattern goIndex = Pattern.compile("/(#page[2-9])");
+   	    Pattern goIndex = Pattern.compile("/#page[2-9]");
    	    Pattern exit = Pattern.compile("/#page1");
    	    Pattern info = Pattern.compile("/userinfo");
 		
@@ -295,10 +280,9 @@ public boolean onKeyDown(int keyCode, KeyEvent event) {
    	    Matcher m_exit = exit.matcher(url);
    	    Matcher m_info = info.matcher(url);
    	   
-
+//		Toast.makeText(getApplicationContext(), webview.copyBackForwardList().getCurrentIndex()+"", Toast.LENGTH_SHORT).show();
 		//获取webview历史页面总数 
    	    int size = webview.copyBackForwardList().getSize();
-   	  
 		     if(webview.canGoBack())
 		     {	 
 		    	 //如果是首页，点击两次后退键退出程序
@@ -328,12 +312,11 @@ public boolean onKeyDown(int keyCode, KeyEvent event) {
 //				    	 else {
 //				    		 webview.goBackOrForward(-size+1);
 //				    		 return true;
-//				    	 }  		
-//			    		 webview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
-				    	 webview.loadUrl("https://m.kdpay.com/#page1");
-				    	 return true;	 
+//				    	 }
+				    	 webview.loadUrl("http://m.kdpay.com/#page1");
+				    	 return true;
+				    	 
 				     }
-			    	
 			    	 webview.goBack();
 			    	 return true;
 		     }
@@ -345,10 +328,9 @@ public boolean onKeyDown(int keyCode, KeyEvent event) {
 		     if(m_info.find())
 		     {
 //		 		Toast.makeText(getApplicationContext(), "can not  goback", Toast.LENGTH_SHORT).show();
-		 		 webview.loadUrl("http://m.kdpay.com/#page1");  
+		 		 webview.loadUrl("http://m.kdpay.com/#page1");
 		    	 return true;
 		     } 
-		  
 	
 	}
   	 return super.onKeyDown(keyCode, event);
