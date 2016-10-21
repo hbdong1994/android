@@ -73,7 +73,7 @@ public void registerReciver(){
 //			Toast.makeText(mContext, " "+netstatus+" ", Toast.LENGTH_SHORT).show();
 			if(netstatus != -1)
 			{
-				Toast toast = Toast.makeText(getApplicationContext(), "加载网络中···跳转首页中···", Toast.LENGTH_SHORT);
+				Toast toast = Toast.makeText(getApplicationContext(), "鍔犺浇缃戠粶涓仿仿疯烦杞椤典腑路路路", Toast.LENGTH_SHORT);
 				toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 				toast.show();
 				 Intent intents = new Intent(FailNotFound.this,MainActivity.class);

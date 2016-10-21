@@ -21,50 +21,50 @@ import android.view.View;
 /****
  * 
  * @author hbdong
- * @class ×Ô¶¨Òå½ø¶ÈÊÔÍ¼
+ * @class è‡ªå®šä¹‰è¿›åº¦è¯•å›¾
  */
 public class LoadingView extends View{
-	// »­ÊµÐÄÔ²µÄ»­±Ê  
+	// ç”»å®žå¿ƒåœ†çš„ç”»ç¬”  
 	       private Paint mCirclePaint;  
-	        // »­Ô²»·µÄ»­±Ê  
+	        // ç”»åœ†çŽ¯çš„ç”»ç¬”  
 	       private Paint mRingPaint;  
-	       // »­×ÖÌåµÄ»­±Ê  
+	       // ç”»å­—ä½“çš„ç”»ç¬”  
 	        private Paint mTextPaint;  
 	        
-	        //»­Í¼Æ¬µÄ»­±Ê
+	        //ç”»å›¾ç‰‡çš„ç”»ç¬”
 	        private Paint mBmpPaint;
 	        
 	        //bitmap
 	        private Bitmap bmp ;
-	       // Ô²ÐÎÑÕÉ«  
+	       // åœ†å½¢é¢œè‰²  
 	        private int mCircleColor;  
-	        // Ô²»·ÑÕÉ«  
+	        // åœ†çŽ¯é¢œè‰²  
 	        private int mRingColor;  
-	       // °ë¾¶  
+	       // åŠå¾„  
 	       private float mRadius;  
-	        // Ô²»·°ë¾¶  
+	        // åœ†çŽ¯åŠå¾„  
 	        private float mRingRadius;  
-	       // Ô²»·¿í¶È  
+	       // åœ†çŽ¯å®½åº¦  
 	        private float mStrokeWidth;  
-	       // Ô²ÐÄx×ø±ê  
+	       // åœ†å¿ƒxåæ ‡  
 	        private int mXCenter;  
-	        // Ô²ÐÄy×ø±ê  
+	        // åœ†å¿ƒyåæ ‡  
 	        private int mYCenter;  
-	        // ×ÖµÄ³¤¶È  
+	        // å­—çš„é•¿åº¦  
 	        private float mTxtWidth;  
-	         // ×ÖµÄ¸ß¶È  
+	         // å­—çš„é«˜åº¦  
 	         private float mTxtHeight;  
 	         
 	         private float mBmpWidth;
 	         
 	         private float mBmpHeight;
-	         // ×Ü½ø¶È  
+	         // æ€»è¿›åº¦  
 	         private int mTotalProgress = 100;  
 	         private int mProgress; 
 	         /****
 	          * 
-	          * @param context ÉÏÏÂÎÄÖ¸Õë
-	          * @param attrs ×Ô¶¨Òå×ÊÔ´ÎÄ¼þ
+	          * @param context ä¸Šä¸‹æ–‡æŒ‡é’ˆ
+	          * @param attrs è‡ªå®šä¹‰èµ„æºæ–‡ä»¶
 	          */
 	         public LoadingView(Context context,AttributeSet attrs)
 	         {
@@ -74,9 +74,9 @@ public class LoadingView extends View{
 	         }
 
 	         /*****
-	          * ¼ÓÔØ±¾µØ×Ô¶¨Òå×ÊÔ´ÎÄ¼þ£¬²ÎÊý¸³Öµ
-	          * @param context ÉÏÏÂÎÄ¶ÔÏó
-	          * @param attrs  ×ÊÔ´ÎÄ¼þ
+	          * åŠ è½½æœ¬åœ°è‡ªå®šä¹‰èµ„æºæ–‡ä»¶ï¼Œå‚æ•°èµ‹å€¼
+	          * @param context ä¸Šä¸‹æ–‡å¯¹è±¡
+	          * @param attrs  èµ„æºæ–‡ä»¶
 	          */
 			private void initAttrs(Context context, AttributeSet attrs) {
 				// TODO Auto-generated method stub
@@ -92,27 +92,27 @@ public class LoadingView extends View{
 			}
 
 			/****
-			 * ³õÊ¼»­±Ê¶ÔÏó
-			 * ÍâÈ¦»­±Ê
-			 * ÑÕÉ«Ìî³ä»­±Ê
-			 * Î»Í¼»­±Ê
+			 * åˆå§‹ç”»ç¬”å¯¹è±¡
+			 * å¤–åœˆç”»ç¬”
+			 * é¢œè‰²å¡«å……ç”»ç¬”
+			 * ä½å›¾ç”»ç¬”
 			 */
 			private void initVariable() {
 				// TODO Auto-generated method stub
-				//ÉèÖÃÍâÐÎ»­±Ê
+				//è®¾ç½®å¤–å½¢ç”»ç¬”
 				mCirclePaint =new Paint();
-				mCirclePaint.setAntiAlias(true);//ÉèÖÃ»­±Ê¾â³ÝÐ§¹û
-				mCirclePaint.setColor(mCircleColor);//ÉèÖÃ»­±ÊÑÕÉ«
-				mCirclePaint.setStyle(Paint.Style.FILL);//ÉèÖÃ»­±Ê·ç¸ñ £¨¿ÕÐÄ|ÊµÐÄ£©
+				mCirclePaint.setAntiAlias(true);//è®¾ç½®ç”»ç¬”é”¯é½¿æ•ˆæžœ
+				mCirclePaint.setColor(mCircleColor);//è®¾ç½®ç”»ç¬”é¢œè‰²
+				mCirclePaint.setStyle(Paint.Style.FILL);//è®¾ç½®ç”»ç¬”é£Žæ ¼ ï¼ˆç©ºå¿ƒ|å®žå¿ƒï¼‰
 				
-				//ÉèÖÃÌî³ä»­±Ê
+				//è®¾ç½®å¡«å……ç”»ç¬”
 				mRingPaint = new Paint();
 				mRingPaint.setAntiAlias(true);
 				mRingPaint.setColor(mRingColor);
 				mRingPaint.setStyle(Paint.Style.STROKE);
 				mRingPaint.setStrokeWidth(mStrokeWidth);
 				
-				//»­±Êpaint¶ÔÏóÉèÖÃ
+				//ç”»ç¬”paintå¯¹è±¡è®¾ç½®
 //				mTextPaint = new Paint();
 //				mTextPaint.setAntiAlias(true);
 //				mTextPaint.setStyle(Paint.Style.FILL);
@@ -122,7 +122,7 @@ public class LoadingView extends View{
 //				FontMetrics fm =mTextPaint.getFontMetrics();
 //				mTxtHeight = (int)Math.ceil(fm.descent - fm.ascent);
 				
-				//ÉèÖÃÎ»Í¼»­±Ê
+				//è®¾ç½®ä½å›¾ç”»ç¬”
 				mBmpPaint = new Paint();
 				bmp = BitmapFactory.decodeResource(getResources(), R.drawable.kd1);
 				mBmpWidth = bmp.getWidth();
@@ -130,15 +130,15 @@ public class LoadingView extends View{
 	
 			}
 			/*******
-			 * @param canvas »­²¼¶ÔÏó
+			 * @param canvas ç”»å¸ƒå¯¹è±¡
 			 */
 			protected void onDraw(Canvas canvas)
 			{
 				mXCenter = getWidth() /2 ;
 				mYCenter = getHeight() /2 ;
-				 //»­Íâ²¿Ô²
+				 //ç”»å¤–éƒ¨åœ†
 				canvas.drawCircle(mXCenter, mYCenter,mRadius , mCirclePaint);
-				//½«×Ô¶¨ÒåÍ¼Ïñ»­ÔÚÖÐ¼ä
+				//å°†è‡ªå®šä¹‰å›¾åƒç”»åœ¨ä¸­é—´
 				canvas.drawBitmap(bmp, mXCenter - mBmpWidth/2, mYCenter - mBmpHeight/2,mBmpPaint);
 				
 				if(mProgress > 0)
@@ -148,7 +148,7 @@ public class LoadingView extends View{
 					oval.top = (mYCenter - mRingRadius);
 					oval.right = mRingRadius  + mXCenter;
 					oval.bottom = mRingRadius + mYCenter;
-					//drawArc »æÖÆÔ²»¡ÐÎ×´
+					//drawArc ç»˜åˆ¶åœ†å¼§å½¢çŠ¶
 					canvas.drawArc(oval, -90, ((float)mProgress/mTotalProgress)*360, false, mRingPaint);
 					
 //					String txt = mProgress+"%";
@@ -166,8 +166,8 @@ public class LoadingView extends View{
 			}
 			
 			/***
-			 * ÉèÖÃviewµÄprogressÖµ
-			 * @param Progress ½ø¶ÈÖµ
+			 * è®¾ç½®viewçš„progresså€¼
+			 * @param Progress è¿›åº¦å€¼
 			 */
 			public void setProgress(int Progress) {
 				mProgress= Progress;
