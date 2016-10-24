@@ -42,12 +42,14 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	private WebView webview;
 	private ImageView image;
 	private LoadingView loading;
+	private TextView txt;
 	private LoadingSwipeRefreshLayout swipeLayout;
 	
 	int dialog_count = 0;
@@ -70,6 +72,7 @@ public class MainActivity extends Activity {
 		Boolean user_first = setting.getBoolean("FIRST", true);
 		
 		webview = (WebView) findViewById(R.id.webView1);
+//		txt = (TextView) findViewById(R.id.showRefresh);
 		swipeLayout = (LoadingSwipeRefreshLayout) findViewById(R.id.swipe_container);
 		swipeLayout.setViewGroup(webview);
 		swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -100,11 +103,13 @@ public class MainActivity extends Activity {
             			webview.loadUrl("http://m.kdpay.com/#page1");
             }    
         }, 2000);
+		
+//		webview.setInitialScale(50); 
 		//设置webview属性
 		webview.getSettings().setJavaScriptEnabled(true);//允许JS
 		webview.getSettings().setSupportZoom(true);
 		webview.requestFocus();//使页面获得焦点
-//		webview.getSettings().setUseWideViewPort(true);// 这个很关键 ，任意比例缩放
+		webview.getSettings().setUseWideViewPort(true);// 这个很关键 ，任意比例缩放
 		webview.getSettings().setAllowFileAccess(true);   //获取本地文件访问权限  登录cookie时使用，免登录
 		webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
 		webview.getSettings().setDomStorageEnabled(true);
@@ -118,7 +123,12 @@ public class MainActivity extends Activity {
 		{
 			webview.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);// 支持内容重新布局
 		}
-//		webview.getSettings().setLoadWithOverviewMode(true); //支持缩放到屏幕大小
+//		else 
+//		{
+//			webview.getSettings().setSupportZoom(false);
+//		}
+//		webview.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);// 支持内容重新布局
+		webview.getSettings().setLoadWithOverviewMode(true); //支持缩放到屏幕大小
 		
 		//判断用户是否第一次启动，不启用缓存
 //		if(user_first)
