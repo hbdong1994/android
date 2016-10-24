@@ -22,13 +22,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.PatternMatcher;
 import android.preference.PreferenceManager.OnActivityResultListener;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
+import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.webkit.ValueCallback;
 import android.webkit.WebBackForwardList;
@@ -45,6 +48,7 @@ public class MainActivity extends Activity {
 	private WebView webview;
 	private ImageView image;
 	private LoadingView loading;
+	private LoadingSwipeRefreshLayout swipeLayout;
 	
 	int dialog_count = 0;
 	//实现固定时间内点击两次按钮退出程序
@@ -66,6 +70,18 @@ public class MainActivity extends Activity {
 		Boolean user_first = setting.getBoolean("FIRST", true);
 		
 		webview = (WebView) findViewById(R.id.webView1);
+		swipeLayout = (LoadingSwipeRefreshLayout) findViewById(R.id.swipe_container);
+		swipeLayout.setViewGroup(webview);
+		swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				// TODO Auto-generated method stub		
+					webview.loadUrl(webview.getUrl());
+			}		
+		} );
+	   
+		swipeLayout.setColorScheme(R.color.holo_blue_bright,R.color.holo_green_dark,R.color.holo_orange_dark,R.color.holo_red_dark);
+		
 		
 		image = (ImageView) findViewById(R.id.imageView1);
 		image.setBackgroundResource(R.drawable.ic_welcome);
@@ -88,7 +104,7 @@ public class MainActivity extends Activity {
 		webview.getSettings().setJavaScriptEnabled(true);//允许JS
 		webview.getSettings().setSupportZoom(true);
 		webview.requestFocus();//使页面获得焦点
-		webview.getSettings().setUseWideViewPort(true);// 这个很关键 ，任意比例缩放
+//		webview.getSettings().setUseWideViewPort(true);// 这个很关键 ，任意比例缩放
 		webview.getSettings().setAllowFileAccess(true);   //获取本地文件访问权限  登录cookie时使用，免登录
 		webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
 		webview.getSettings().setDomStorageEnabled(true);
@@ -102,7 +118,7 @@ public class MainActivity extends Activity {
 		{
 			webview.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);// 支持内容重新布局
 		}
-		webview.getSettings().setLoadWithOverviewMode(true); //支持缩放到屏幕大小
+//		webview.getSettings().setLoadWithOverviewMode(true); //支持缩放到屏幕大小
 		
 		//判断用户是否第一次启动，不启用缓存
 //		if(user_first)
@@ -127,6 +143,8 @@ public class MainActivity extends Activity {
 		
 		
 		webview.setWebViewClient(new WebViewClient(){
+			
+			
 		  @Override
 		public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
 			// TODO Auto-generated method stub
@@ -185,6 +203,8 @@ public class MainActivity extends Activity {
 		
 		
 		webview.setWebChromeClient(new WebChromeClient(){
+			
+			
 			  //关键代码，以下函数是没有API文档的，所以在Eclipse中会报错，如果添加了@Override关键字在这里的话。
 
 			// For 3.0+ Devices (Start)
@@ -244,7 +264,7 @@ public class MainActivity extends Activity {
 				if(newProgress == 100)
 				{
 					//加载完成
-
+					swipeLayout.setRefreshing(false);
 					loading.setVisibility(View.INVISIBLE);
 					image.setVisibility(View.INVISIBLE);
 
@@ -257,6 +277,11 @@ public class MainActivity extends Activity {
 				}
 				else 
 				{
+//					if(!swipeLayout.isRefreshing())
+//					{
+//						swipeLayout.setRefreshing(true);
+//					}
+					
 					loading.setVisibility(View.VISIBLE);
 					loading.setProgress(newProgress);
 					image.setVisibility(View.VISIBLE);

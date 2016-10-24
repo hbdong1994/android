@@ -4,20 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.kdpay.MainActivity" >
-
+ 
+ <com.example.kdpay.LoadingSwipeRefreshLayout
+        android:id="@+id/swipe_container"  
+        android:layout_width="match_parent"  
+        android:layout_height="match_parent" >  
     <WebView
         android:id="@+id/webView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
        />
-
-    <ImageView
+	</com.example.kdpay.LoadingSwipeRefreshLayout>
+   
+ <ImageView
         android:id="@+id/imageView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     
-   
-
      <com.example.kdpay.LoadingView
          android:id="@+id/loading"
          android:layout_width="40dp"

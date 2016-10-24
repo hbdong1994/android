@@ -48,6 +48,38 @@ containing a value of this type.
          */
         public static final int strokeWidth=0x7f010001;
     }
+    public static final class color {
+        /**  A really bright Holo shade of blue 
+         */
+        public static final int holo_blue_bright=0x7f040009;
+        /**  A dark Holo shade of blue 
+         */
+        public static final int holo_blue_dark=0x7f040003;
+        /**  A light Holo shade of blue 
+         */
+        public static final int holo_blue_light=0x7f040000;
+        /**  A dark Holo shade of green 
+         */
+        public static final int holo_green_dark=0x7f040004;
+        /**  A light Holo shade of green 
+         */
+        public static final int holo_green_light=0x7f040001;
+        /**  A dark Holo shade of orange 
+         */
+        public static final int holo_orange_dark=0x7f040008;
+        /**  A light Holo shade of orange 
+         */
+        public static final int holo_orange_light=0x7f040007;
+        /**  A Holo shade of purple 
+         */
+        public static final int holo_purple=0x7f040006;
+        /**  A dark Holo shade of red 
+         */
+        public static final int holo_red_dark=0x7f040005;
+        /**  A light Holo shade of red 
+         */
+        public static final int holo_red_light=0x7f040002;
+    }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
 
@@ -56,8 +88,8 @@ containing a value of this type.
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
         public static final int ic_404=0x7f020000;
@@ -67,20 +99,21 @@ containing a value of this type.
         public static final int kd1=0x7f020004;
     }
     public static final class id {
-        public static final int imageView1=0x7f080001;
-        public static final int loading=0x7f080002;
-        public static final int webView1=0x7f080000;
+        public static final int imageView1=0x7f090002;
+        public static final int loading=0x7f090003;
+        public static final int swipe_container=0x7f090000;
+        public static final int webView1=0x7f090001;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int failtofound=0x7f030001;
     }
     public static final class menu {
-        public static final int main=0x7f070000;
+        public static final int main=0x7f080000;
     }
     public static final class string {
-        public static final int app_name=0x7f050000;
-        public static final int hello_world=0x7f050001;
+        public static final int app_name=0x7f060000;
+        public static final int hello_world=0x7f060001;
     }
     public static final class style {
         /** 
@@ -104,11 +137,11 @@ containing a value of this type.
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f070001;
     }
     public static final class styleable {
         /** Attributes that can be used with a LoadingView.
